@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Student Portal | Dashboard</title>
+  <title>Student Portal | Academic Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,128 +17,54 @@
       --border: #e2e8f0;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; outline: none; }
+    body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      line-height: 1.6;
-    }
+    /* Modern School UI */
+    nav { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .nav-brand { font-weight: 700; font-size: 1.2rem; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.85rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
 
-    /* Navbar */
-    nav {
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+    .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
+    .header-section { margin-bottom: 2.5rem; }
+    .header-section h1 { font-size: 1.75rem; color: #0f172a; margin: 0 0 0.5rem 0; }
+    .header-section p { color: var(--text-muted); margin: 0; font-size: 0.95rem; }
 
-    .nav-brand { font-weight: 700; font-size: 1.25rem; color: var(--primary); display: flex; align-items: center; gap: 10px; }
-    .nav-links { display: flex; gap: 2rem; }
-    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
 
-    /* Dashboard Layout */
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+    .card h2 { font-size: 1rem; color: #334155; margin-top: 0; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
 
-    .header-section { margin-bottom: 2rem; }
-    .header-section h1 { font-size: 1.8rem; margin: 0; }
-    .header-section p { color: var(--text-muted); }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .card h2 { font-size: 1.1rem; margin-top: 0; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    /* Fake School Content */
+    .item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #f1f5f9; }
+    .item:last-child { border-bottom: none; }
+    .badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 100px; font-weight: 600; }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-green { background: #dcfce7; color: #166534; }
 
     /* Save Manager */
-    .upload-area {
-      border: 2px dashed var(--border);
-      padding: 2rem;
-      text-align: center;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
+    .drop-zone { border: 2px dashed var(--border); border-radius: 8px; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s; }
+    .drop-zone:hover { background: #f1f5f9; border-color: var(--primary); }
+    .drop-zone p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
+
+    /* Hidden Stealth Menu */
+    #stealthOverlay {
+      position: fixed; inset: 0; background: #000; z-index: 9999;
+      display: none; flex-direction: column; align-items: center; padding: 3rem;
+      color: #fff;
     }
-
-    .upload-area:hover { background: #f1f5f9; }
-    .btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 0.9rem;
+    .stealth-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #444; margin-bottom: 2rem; }
+    .game-grid { 
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+      gap: 10px; width: 100%; max-width: 900px; overflow-y: auto; 
     }
-
-    /* Secret Menu Styles */
-    #secretOverlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.9);
-      z-index: 1000;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
+    .game-name {
+      padding: 0.75rem; color: #999; cursor: pointer; border: 1px solid #222; 
+      border-radius: 4px; text-align: center; font-size: 0.9rem; transition: all 0.2s;
     }
-
-    .secret-list {
-      list-style: none;
-      padding: 0;
-      width: 100%;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-
-    .secret-item {
-      padding: 1rem;
-      border-bottom: 1px solid #333;
-      color: #ccc;
-      cursor: pointer;
-      font-size: 1.1rem;
-      text-align: center;
-      transition: color 0.2s;
-    }
-
-    .secret-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
-
-    .secret-header { color: #666; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; }
-
-    /* Decorative School Items */
-    .assignment-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .status-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 100px; background: #dcfce7; color: #166534; }
-
-    #searchBar { display: none; } /* Hidden from school view */
+    .game-name:hover { color: #fff; border-color: #555; background: #111; }
   </style>
 </head>
 <body>
@@ -149,149 +75,124 @@
       Aero Scholar
     </div>
     <div class="nav-links">
-      <a href="#">Dashboard</a>
-      <a href="#">Courses</a>
-      <a href="#">Grades</a>
-      <a href="#">Library</a>
+      <a href="#">Resources</a>
+      <a href="#">Curriculum</a>
+      <a href="#">Assessments</a>
+      <a href="#">System Info</a>
     </div>
   </nav>
 
   <div class="container">
     <div class="header-section">
-      <h1>Welcome back, Student</h1>
-      <p>Terminal Quarter: Spring 2025 | Academic Standing: Good</p>
+      <h1>Dashboard Portfolio</h1>
+      <p>Active Academic Year: 2024-2025 | Institutional ID: SCH-88219</p>
     </div>
 
     <div class="grid">
-      <div class="main-col">
+      <div class="main-content">
         <div class="card">
-          <h2>Upcoming Deadlines</h2>
-          <div class="assignment-item">
-            <span>Research Paper - History 101</span>
-            <span class="status-badge">Due Monday</span>
-          </div>
-          <div class="assignment-item">
-            <span>Calculus Problem Set #4</span>
-            <span class="status-badge">Due Wednesday</span>
-          </div>
-          <div class="assignment-item">
-            <span>Biology Lab Report</span>
-            <span class="status-badge">Due Friday</span>
-          </div>
+          <h2>Pending Tasks</h2>
+          <div class="item"><span>Data Structures - Lab 4</span> <span class="badge badge-blue">Processing</span></div>
+          <div class="item"><span>Global Economics Essay</span> <span class="badge badge-blue">Pending</span></div>
+          <div class="item"><span>Physics Simulation Result</span> <span class="badge badge-green">Validated</span></div>
         </div>
 
         <div class="card">
-          <h2>Save Data Manager</h2>
-          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-            Upload your `.json` game save files to sync progress between sessions.
-          </p>
-          <div class="upload-area" onclick="document.getElementById('saveLoader').click()">
-            <svg style="margin-bottom: 10px;" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-            <p>Click to browse JSON save files</p>
-            <input type="file" id="saveLoader" style="display:none" accept=".json" onchange="handleSaveUpload(event)" />
+          <h2>Local Save Manager</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Upload your game save JSON files to restore your progress in secondary windows.</p>
+          <div class="drop-zone" onclick="document.getElementById('saveInput').click()">
+            <p>Click to browse localized backup data (.json)</p>
+            <input type="file" id="saveInput" style="display:none" accept=".json" onchange="importSave(event)" />
           </div>
         </div>
       </div>
 
-      <div class="side-col">
+      <div class="sidebar">
         <div class="card">
-          <h2>System Status</h2>
+          <h2>System Integrity</h2>
           <div style="font-size: 0.85rem;">
-            <p><strong>Cloud Sync:</strong> <span style="color: #166534">Disabled</span></p>
-            <p><strong>Local Storage:</strong> 84% Available</p>
-            <p><strong>Active Session:</strong> 12:44:02</p>
+            <p><strong>Cloud Sync:</strong> <span style="color: #ef4444;">Disconnected</span></p>
+            <p><strong>Cache Status:</strong> Operational</p>
+            <p><strong>Database:</strong> Local Only</p>
           </div>
-        </div>
-        <div class="card">
-          <h2>Announcements</h2>
-          <p style="font-size: 0.8rem; color: var(--text-muted);">The campus library will be closed this Sunday for scheduled maintenance.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Stealth Game Menu (Hidden) -->
-  <div id="secretOverlay">
-    <div class="secret-header">Bypassing... Hold ESC+1 to exit</div>
-    <ul class="secret-list" id="gameList">
-      <!-- Game names only injected here -->
-    </ul>
+  <div id="stealthOverlay">
+    <div class="stealth-title">Directory Override / Release ESC+1 to close</div>
+    <div class="game-grid" id="gameGrid">
+      <!-- Games injected here -->
+    </div>
   </div>
 
   <script>
-    // Local Game Data (Replace with your actual game IDs/URLs)
-    // Note: Removed Supabase entirely. Data is local.
-    const games = [
-      { name: "Slope", id: 1, url: "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main/1.html" },
-      { name: "1v1.LOL", id: 2, url: "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main/2.html" },
-      { name: "BitLife", id: 3, url: "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main/3.html" },
-      { name: "Retro Bowl", id: 4, url: "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main/4.html" },
-      { name: "Drive Mad", id: 5, url: "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main/5.html" },
-      { name: "Subway Surfers", id: 6, url: "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main/6.html" },
-      { name: "Stickman Hook", id: 7, url: "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main/7.html" }
-    ];
+    // Configuration - update this to point to your hosted HTML files path
+    const HTML_URL_BASE = "https://cdn.jsdelivr.net/gh/comet-pixelated/html@main"; 
 
-    const keysPressed = {};
-    const overlay = document.getElementById('secretOverlay');
+    const keys = {};
+    const overlay = document.getElementById('stealthOverlay');
+    let gameData = [];
 
-    // Detect Key Combo (ESC + 1)
+    // 1. Fetch zones.json
+    async function loadDirectory() {
+      try {
+        const res = await fetch('/zones.json');
+        gameData = await res.json();
+      } catch (e) {
+        console.warn("Directory fetch failed. Ensure zones.json is at root.");
+      }
+    }
+
+    // 2. Secret Key Combination (ESC + 1)
     window.addEventListener('keydown', (e) => {
-      keysPressed[e.key] = true;
-      
-      if (keysPressed['Escape'] && keysPressed['1']) {
+      keys[e.key] = true;
+      if (keys['Escape'] && keys['1']) {
         overlay.style.display = 'flex';
-        renderGameList();
+        renderNames();
       }
     });
 
     window.addEventListener('keyup', (e) => {
-      keysPressed[e.key] = false;
-      // Note: We keep the menu open until they click or toggle it again
       if (e.key === 'Escape') overlay.style.display = 'none';
+      keys[e.key] = false;
     });
 
-    function renderGameList() {
-      const list = document.getElementById('gameList');
-      list.innerHTML = '';
-      games.forEach(game => {
-        const li = document.createElement('li');
-        li.className = 'secret-item';
-        li.textContent = game.name;
-        li.onclick = () => launchGame(game.url, game.name);
-        list.appendChild(li);
+    // 3. Render Name List
+    function renderNames() {
+      const grid = document.getElementById('gameGrid');
+      grid.innerHTML = '';
+      gameData.forEach(game => {
+        const div = document.createElement('div');
+        div.className = 'game-name';
+        div.textContent = game.name;
+        div.onclick = () => launch(game.url);
+        grid.appendChild(div);
       });
     }
 
-    /**
-     * Launch Game in about:blank
-     * This is the highest level of cloaking for school filters.
-     */
-    async function launchGame(url, name) {
+    // 4. Launcher (about:blank cloak)
+    function launch(url) {
+      // Replace the placeholder from your zones.json
+      const finalUrl = url.replace('{HTML_URL}', HTML_URL_BASE);
+      
       const win = window.open('about:blank', '_blank');
-      if (!win) {
-        alert("Pop-up blocked! Enable pop-ups to launch games.");
-        return;
-      }
+      if (!win) return alert("Allow popups for external tools.");
 
       const doc = win.document;
-      doc.title = "Assignments - Student Portal"; // Fake tab title
+      doc.title = "Learning Module - Terminal";
       
       const iframe = doc.createElement('iframe');
-      iframe.src = url;
-      iframe.style.position = "fixed";
-      iframe.style.top = "0";
-      iframe.style.left = "0";
-      iframe.style.width = "100vw";
-      iframe.style.height = "100vh";
-      iframe.style.border = "none";
+      iframe.src = finalUrl;
+      iframe.style = "position:fixed; top:0; left:0; width:100%; height:100%; border:none; background:#000;";
       
       doc.body.style.margin = "0";
-      doc.body.style.padding = "0";
       doc.body.appendChild(iframe);
     }
 
-    // Local Save Handler
-    function handleSaveUpload(event) {
+    // 5. JSON Save Importer
+    function importSave(event) {
       const file = event.target.files[0];
       if (!file) return;
 
@@ -299,18 +200,15 @@
       reader.onload = (e) => {
         try {
           const data = JSON.parse(e.target.result);
-          // Apply keys to local storage
-          for (const key in data) {
-            localStorage.setItem(key, data[key]);
-          }
-          alert("Backup Applied Successfully. Progress refreshed.");
+          Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
+          alert("Backup data integrated. Refreshing viewport...");
           location.reload();
-        } catch (err) {
-          alert("Invalid JSON save file.");
-        }
+        } catch (err) { alert("Data format error."); }
       };
       reader.readAsText(file);
     }
+
+    loadDirectory();
   </script>
 </body>
 </html>
