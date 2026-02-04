@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Student Portal | Academic Dashboard</title>
+  <title>Aero Library | Catalog System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
     * { box-sizing: border-box; outline: none; }
     body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; }
 
-    /* Modern School UI */
+    /* Library App UI */
     nav { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
     .nav-brand { font-weight: 700; font-size: 1.2rem; color: var(--primary); display: flex; align-items: center; gap: 8px; }
     .nav-links { display: flex; gap: 1.5rem; }
@@ -37,14 +37,14 @@
     .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .card h2 { font-size: 1rem; color: #334155; margin-top: 0; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
 
-    /* Fake School Content */
+    /* Library-themed Items */
     .item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid #f1f5f9; }
     .item:last-child { border-bottom: none; }
     .badge { font-size: 0.7rem; padding: 3px 10px; border-radius: 100px; font-weight: 600; }
     .badge-blue { background: #dbeafe; color: #1e40af; }
     .badge-green { background: #dcfce7; color: #166534; }
 
-    /* Save Manager */
+    /* Local Repository / Save Manager */
     .drop-zone { border: 2px dashed var(--border); border-radius: 8px; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.2s; }
     .drop-zone:hover { background: #f1f5f9; border-color: var(--primary); }
     .drop-zone p { margin: 0; font-size: 0.85rem; color: var(--text-muted); }
@@ -71,37 +71,37 @@
 
   <nav>
     <div class="nav-brand">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
-      Aero Scholar
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      Aero Library
     </div>
     <div class="nav-links">
-      <a href="#">Resources</a>
-      <a href="#">Curriculum</a>
-      <a href="#">Assessments</a>
+      <a href="#">Catalog</a>
+      <a href="#">Digital Archives</a>
+      <a href="#">Support</a>
       <a href="#">System Info</a>
     </div>
   </nav>
 
   <div class="container">
     <div class="header-section">
-      <h1>Dashboard Portfolio</h1>
-      <p>Active Academic Year: 2024-2025 | Institutional ID: SCH-88219</p>
+      <h1>Library Catalog System</h1>
+      <p>Access Level: Educational / Library ID: LIB-2025-01</p>
     </div>
 
     <div class="grid">
       <div class="main-content">
         <div class="card">
-          <h2>Pending Tasks</h2>
-          <div class="item"><span>Data Structures - Lab 4</span> <span class="badge badge-blue">Processing</span></div>
-          <div class="item"><span>Global Economics Essay</span> <span class="badge badge-blue">Pending</span></div>
-          <div class="item"><span>Physics Simulation Result</span> <span class="badge badge-green">Validated</span></div>
+          <h2>Recent Borrowing Activity</h2>
+          <div class="item"><span>Modern Web Architecture (Ref: 402)</span> <span class="badge badge-green">Returned</span></div>
+          <div class="item"><span>Economic Trends 2024 (Digital Copy)</span> <span class="badge badge-blue">On Loan</span></div>
+          <div class="item"><span>Intro to Quantum Logic</span> <span class="badge badge-blue">In Transit</span></div>
         </div>
 
         <div class="card">
-          <h2>Local Save Manager</h2>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Upload your game save JSON files to restore your progress in secondary windows.</p>
+          <h2>Local Repository Manager</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Upload your localized JSON data to sync your digital progress across active modules.</p>
           <div class="drop-zone" onclick="document.getElementById('saveInput').click()">
-            <p>Click to browse localized backup data (.json)</p>
+            <p>Select Inventory Backup File (.json)</p>
             <input type="file" id="saveInput" style="display:none" accept=".json" onchange="importSave(event)" />
           </div>
         </div>
@@ -109,11 +109,11 @@
 
       <div class="sidebar">
         <div class="card">
-          <h2>System Integrity</h2>
+          <h2>Library Status</h2>
           <div style="font-size: 0.85rem;">
-            <p><strong>Cloud Sync:</strong> <span style="color: #ef4444;">Disconnected</span></p>
-            <p><strong>Cache Status:</strong> Operational</p>
-            <p><strong>Database:</strong> Local Only</p>
+            <p><strong>Database:</strong> Local Only (Disconnected)</p>
+            <p><strong>Archives:</strong> Searchable</p>
+            <p><strong>Session ID:</strong> 4419-A</p>
           </div>
         </div>
       </div>
@@ -121,16 +121,13 @@
   </div>
 
   <div id="stealthOverlay">
-    <div class="stealth-title">Directory Override / Release ESC+1 to close</div>
+    <div class="stealth-title">Inventory Override / Press ESC+1 to Toggle</div>
     <div class="game-grid" id="gameGrid">
       <!-- Games injected here -->
     </div>
   </div>
 
   <script>
-    // Configuration - update this to point to your hosted HTML files path
-    const HTML_URL_BASE = "https://cdn.jsdelivr.net/gh/schooltools123/html@main"; 
-
     const keys = {};
     const overlay = document.getElementById('stealthOverlay');
     let gameData = [];
@@ -141,21 +138,26 @@
         const res = await fetch('/zones.json');
         gameData = await res.json();
       } catch (e) {
-        console.warn("Directory fetch failed. Ensure zones.json is at root.");
+        console.warn("Catalog fetch failed.");
       }
     }
 
-    // 2. Secret Key Combination (ESC + 1)
+    // 2. Secret Key Toggle (ESC + 1)
     window.addEventListener('keydown', (e) => {
       keys[e.key] = true;
       if (keys['Escape'] && keys['1']) {
-        overlay.style.display = 'flex';
-        renderNames();
+        const isHidden = overlay.style.display === 'none' || overlay.style.display === '';
+        overlay.style.display = isHidden ? 'flex' : 'none';
+        
+        if (isHidden) renderNames();
+        
+        // Prevent rapid fire toggle
+        keys['Escape'] = false;
+        keys['1'] = false;
       }
     });
 
     window.addEventListener('keyup', (e) => {
-      if (e.key === 'Escape') overlay.style.display = 'none';
       keys[e.key] = false;
     });
 
@@ -172,19 +174,17 @@
       });
     }
 
-    // 4. Launcher (about:blank cloak)
+    // 4. Launcher (Direct URL to prevent "code showing" issue)
     function launch(url) {
-      // Replace the placeholder from your zones.json
-      const finalUrl = url.replace('{HTML_URL}', HTML_URL_BASE);
-      
       const win = window.open('about:blank', '_blank');
-      if (!win) return alert("Allow popups for external tools.");
+      if (!win) return alert("Allow popups to open archives.");
 
       const doc = win.document;
-      doc.title = "Learning Module - Terminal";
+      doc.title = "Educational Module";
       
       const iframe = doc.createElement('iframe');
-      iframe.src = finalUrl;
+      // Using URL directly from zones.json as per requirement
+      iframe.src = url; 
       iframe.style = "position:fixed; top:0; left:0; width:100%; height:100%; border:none; background:#000;";
       
       doc.body.style.margin = "0";
@@ -201,9 +201,9 @@
         try {
           const data = JSON.parse(e.target.result);
           Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
-          alert("Backup data integrated. Refreshing viewport...");
+          alert("Inventory data integrated.");
           location.reload();
-        } catch (err) { alert("Data format error."); }
+        } catch (err) { alert("Format error."); }
       };
       reader.readAsText(file);
     }
