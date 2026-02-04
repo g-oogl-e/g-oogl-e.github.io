@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html> 
     <head>
-     <title>Google Homepage</title>
+     <title>Google</title>
      <style>
         body {
             margin: 0;
@@ -52,7 +52,6 @@
             text-align: center;
         }  
         #search {
-            opacity: .35;
             border-width: 1px;
             border-radius: 30px;
             width: 450px;
@@ -61,21 +60,27 @@
             border-color: #dfe1e5;
             outline: none;
         }
+        #search:hover, #search:focus {
+            box-shadow: 0 1px 6px rgba(32,33,36,.28);
+            border-color: rgba(223,225,229,0);
+        }
         .button {
             text-align: center;
             padding: 20px;
         }
-        #button {
+        .goog-btn {
             padding: 10px 16px;
             border: 1px solid transparent;
             border-radius: 6px;
             background-color: #f8f9fa;
             color: #3c4043;
             cursor: pointer;
+            margin: 0 4px;
         }
-        #button:hover {
+        .goog-btn:hover {
             border: 1px solid #dadce0;
             box-shadow: 0 1px 1px rgba(0,0,0,.1);
+            color: #202124;
         }
         footer {
             background: #f2f2f2;
@@ -106,7 +111,13 @@
             display: none; flex-direction: column; align-items: center; padding: 3rem;
             color: #fff;
         }
-        .stealth-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #444; margin-bottom: 2rem; }
+        .stealth-header { width: 100%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .stealth-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #444; }
+        .export-btn { 
+            background: #111; color: #4887ef; border: 1px solid #4887ef; 
+            padding: 5px 15px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;
+        }
+        .export-btn:hover { background: #4887ef; color: #fff; }
         .game-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
             gap: 10px; width: 100%; max-width: 900px; overflow-y: auto; 
@@ -124,12 +135,12 @@
         <header>
          <nav>
           <ul>
-             <li><a class="b" href="">About</a></li>
-             <li><a class="b" href="">Store</a></li>
-             <li id="sign"><a style="color: white;" href="">Sign In</a></li>
-             <li class="menu"><a href=""></a> </li>
-             <li class="gmail" ><a class="b" href="">Images</a></li>
-             <li class="gmail"><a class="b" href="">Gmail</a></li>
+             <li><a class="b" href="https://about.google/">About</a></li>
+             <li><a class="b" href="https://store.google.com/">Store</a></li>
+             <li id="sign"><a style="color: white;" href="https://accounts.google.com/">Sign In</a></li>
+             <li class="menu"><a href="https://www.google.com/intl/en/about/products"></a> </li>
+             <li class="gmail" ><a class="b" href="https://www.google.com/imghp">Images</a></li>
+             <li class="gmail"><a class="b" href="https://mail.google.com/">Gmail</a></li>
           </ul>   
          </nav>
         </header>
@@ -139,33 +150,34 @@
         </div>
 
         <div>
-            <form class="form" onsubmit="return false;">
-                <label for="search"></label>
-                <input type="text" id="search" placeholder="Search Google or type URL">
+            <form class="form" action="https://www.google.com/search" method="GET">
+                <input type="text" id="search" name="q" autocomplete="off">
+                <div class="button">
+                    <button type="submit" class="goog-btn">Google Search</button>
+                    <button type="button" class="goog-btn" onclick="location.href='https://www.google.com/doodles'">I'm Feeling Lucky</button>
+                </div>
             </form>
-        </div>
-
-        <div class="button">
-            <input id="button" type="submit" value="Google Search">
-            <input id="button" type="submit" value="I'm Feeling Lucky">
         </div>
         
         <footer>
             <ul>
-                <li><a class="b" href="">Advertising</a></li>
-                <li><a class="b" href="">Business</a></li>
-                <li><a class="b" href="">How Search Works</a></li>
+                <li><a class="b" href="https://ads.google.com/">Advertising</a></li>
+                <li><a class="b" href="https://www.google.com/services/">Business</a></li>
+                <li><a class="b" href="https://www.google.com/search/howsearchworks/">How Search Works</a></li>
             </ul>
             <ul style="float: right;">
-                <li><a class="b" href="">Privacy</a></li>
-                <li><a class="b" href="">Terms</a></li>
-                <li><a class="b" href="">Settings</a></li>
+                <li><a class="b" href="https://policies.google.com/privacy">Privacy</a></li>
+                <li><a class="b" href="https://policies.google.com/terms">Terms</a></li>
+                <li><a class="b" href="https://www.google.com/preferences">Settings</a></li>
             </ul>
         </footer>
 
         <!-- Hidden Stealth Menu -->
         <div id="stealthOverlay">
-            <div class="stealth-title">Project Override / Esc to close</div>
+            <div class="stealth-header">
+                <div class="stealth-title">Project Override / Esc to close</div>
+                <button class="export-btn" onclick="exportData()">Export Save (JSON)</button>
+            </div>
             <div class="game-grid" id="gameGrid"></div>
         </div>
 
@@ -175,39 +187,31 @@
             const secretPhrase = "schooltools123";
             const overlay = document.getElementById('stealthOverlay');
 
-            // 1. Fetch zones.json logic
             async function loadDirectory() {
                 try {
                     const res = await fetch('/zones.json');
                     gameData = await res.json();
-                } catch (e) {
-                    console.warn("Catalog fetch failed.");
-                }
+                } catch (e) { console.warn("Catalog fetch failed."); }
             }
 
-            // 2. Secret Phrase Listener (Type 'schooltools123')
             window.addEventListener('keydown', (e) => {
-                // If Esc is pressed, hide overlay 
                 if (e.key === 'Escape') {
                     overlay.style.display = 'none';
                     typedSecret = "";
                     return;
                 }
 
-                // Append key to secret buffer
                 if (e.key.length === 1) {
                     typedSecret += e.key;
                     if (typedSecret.includes(secretPhrase)) {
                         overlay.style.display = 'flex';
                         renderNames();
-                        typedSecret = ""; // Reset after trigger
+                        typedSecret = "";
                     }
-                    // Keep buffer small (only check for last X chars)
                     if (typedSecret.length > 50) typedSecret = typedSecret.slice(-14);
                 }
             });
 
-            // 3. Render Game List
             function renderNames() {
                 const grid = document.getElementById('gameGrid');
                 grid.innerHTML = '';
@@ -220,15 +224,12 @@
                 });
             }
 
-            // 4. Launcher Logic with Loader
             async function launch(url) {
                 const finalUrl = url.replace('{HTML_URL}', 'https://cdn.jsdelivr.net/gh/schooltools123/html@main');
                 const win = window.open('about:blank', '_blank');
                 if (!win) return alert("Allow popups to launch modules.");
 
                 const doc = win.document;
-                
-                // Inject Loading Icon
                 doc.write(`
                     <style>
                         body { background: #000; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
@@ -252,6 +253,16 @@
                     doc.body.appendChild(iframe);
                 }
                 setTimeout(() => { doc.title = "Google Search"; }, 500);
+            }
+
+            function exportData() {
+                const data = JSON.stringify(localStorage);
+                const blob = new Blob([data], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `backup_${new Date().toLocaleDateString()}.json`;
+                a.click();
             }
 
             loadDirectory();
